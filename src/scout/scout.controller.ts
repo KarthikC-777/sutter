@@ -3,6 +3,7 @@ import {
   Controller,
   Get,
   HttpStatus,
+  Param,
   Patch,
   Post,
   Put,
@@ -23,6 +24,7 @@ import { paymentDto } from './dto/payment.dto';
 import { planDto } from './dto/planning.dto';
 import { loginDto } from './dto/login.dto';
 import { surveydto } from './dto/survey.dto';
+import { activityDto } from './dto/activity.dto';
 
 @Controller('scouts')
 @ApiTags('Scout Product')
@@ -119,6 +121,18 @@ export class ScoutController {
   async survey(@Body() survey: surveydto) {
     return {
       message: 'Thanks for sharing!!',
+      statusCode: HttpStatus.OK,
+      error: 'No error',
+    };
+  }
+
+  @Get('activity/:activityId')
+  @ApiOperation({ summary: 'Activities' })
+  @ApiOkResponse({ description: 'Activity loaded' })
+  @ApiInternalServerErrorResponse({ description: 'Server Error' })
+  async activity(@Param('activityId') activityId: string) {
+    return {
+      message: 'Activity loaded',
       statusCode: HttpStatus.OK,
       error: 'No error',
     };
